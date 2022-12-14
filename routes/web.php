@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\RegularController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,4 +16,17 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
+});
+
+Route::group([
+    'prefix' => 'test',
+    'as' => 'test.'
+],function () {
+    Route::group([
+        'prefix' => 'regulars',
+        'controller' => RegularController::class,
+        'as' => ''
+        ], function () {
+            Route::get('',['uses' => 'index']);
+        });
 });
